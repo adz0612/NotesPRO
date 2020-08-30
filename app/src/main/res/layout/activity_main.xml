@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -14,19 +14,42 @@
         android:layout_width="173dp"
         android:layout_height="133dp"
         android:text="Recognize Text"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="172dp" />
-<Space
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
     android:layout_width="wrap_content"
     android:layout_height="30dp"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="318dp"
-        android:layout_below="@+id/button"
         android:layout_height="168dp"
+        android:layout_below="@+id/button"
         android:paddingLeft="50dp"
+        android:scrollbars="vertical"
         android:text="Converted Text Will Appear Here..."
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="434dp" />
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/speak"
+        android:layout_width="131dp"
+        android:layout_height="58dp"
+        android:text="Listen to it!"
+        android:enabled="false"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.04" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

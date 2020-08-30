@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,9 +24,12 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
+private TextToSpeech mtts;
+private Button speak;
+private TextView text;
 
 
     @Override
@@ -32,9 +37,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        speak = findViewById(R.id.speak);
 
         Button ret;
-        TextView text;
+
+
+mtts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS){
+           int res =  mtts.setLanguage(Locale.ENGLISH);
+
+           if (res == TextToSpeech.LANG_MISSING_DATA || res ==TextToSpeech.LANG_NOT_SUPPORTED){
+               Toast.makeText(MainActivity.this , "Language not available!",Toast.LENGTH_LONG).show();
+
+
+           }else{
+
+               speak.setEnabled(true);
+           }
+
+        }
+
+
+    }
+});
+
+
+
+speak.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        speakText();
+    }
+});
+
 
 
         ret = findViewById(R.id.button);
@@ -47,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
 
@@ -79,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onSuccess(FirebaseVisionText result) {
                                 Toast.makeText(MainActivity.this , " Boom" ,Toast.LENGTH_SHORT).show();
                                 String resultText = result.getText();
-                                TextView text;
-                                text = findViewById(R.id.textView);
 
+                                text = findViewById(R.id.textView);
+                                text.setMovementMethod(new ScrollingMovementMethod());
                                 text.setText(resultText);
 
                             }
@@ -109,4 +145,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private void speakText(){
+
+        String textToBeSpoken = text.getText().toString();
+       textToBeSpoken = textToBeSpoken.replace('\n' , ' ');
+        float speechRate = (float)1.2;
+        float pitch = (float)1.1;
+
+
+        mtts.setSpeechRate(speechRate);
+        mtts.setPitch(pitch);
+
+        mtts.speak(textToBeSpoken,TextToSpeech.QUEUE_FLUSH,null);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(mtts != null){
+            mtts.stop();
+            mtts.shutdown();
+        }
+        super.onDestroy();
+    }
 }
+
