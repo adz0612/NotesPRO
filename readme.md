@@ -29,7 +29,8 @@ One can also listen to their notes just by taking a picture for quickly revising
 ## Wanna quickly revise your notes but can't read in a moving vehicle? We've got you covered!
 ### So, how does it work?
 
-
+![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/1.png)
+![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/2.png)
 
 
 <p>&nbsp;</p>
