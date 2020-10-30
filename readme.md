@@ -15,9 +15,10 @@ One can also listen to their notes just by taking a picture for quickly revising
 * Take a pic of your notes ---> *notesPRO* converts it to an editable text --> You can search through this text and notesPRO will highlight what you were looking for :D
 
 
+## Can't find something in your notes? We can help!
+### So, how does it work?
 
-
-
+![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/Take%20a.png)
 
 
 
