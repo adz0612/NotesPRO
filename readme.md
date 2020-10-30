@@ -24,6 +24,12 @@ One can also listen to their notes just by taking a picture for quickly revising
 
 ![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/Take%20a.png)
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 ## Wanna quickly revise your notes but can't read in a moving vehicle? We've got you covered!
