@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptio
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -39,6 +42,8 @@ private Button speak;
 private TextView text;
 private  TextView cloudText;
 private EditText textSpeed;
+private Button share;
+private  Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,10 @@ private EditText textSpeed;
         setContentView(R.layout.activity_main);
 
         speak = findViewById(R.id.speak);
+        share = findViewById(R.id.share);
+        save = findViewById(R.id.save);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
         Button ret;
         textSpeed = findViewById(R.id.speed);
@@ -73,26 +82,60 @@ private EditText textSpeed;
 
 
 
-         /*
+
+        save.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            if (!text.getText().toString().isEmpty()) {
+
+               File file = new File(MainActivity.this.getFilesDir(), "text");
+               if (!file.exists()) {
+                  file.mkdir();
+               }
+               try {
+                  File gpxfile = new File(file, "adz0612adz.txt");
+                  FileWriter writer = new FileWriter(gpxfile);
+                  writer.append(text.getText().toString());
+                  writer.flush();
+                  writer.close();
+                  Toast.makeText(MainActivity.this, "Saved your text", Toast.LENGTH_LONG).show();
+               } catch (Exception e) { }
+            }
+         }
+      });
 
 
 
-        copy.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+
+        share.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+
+                                        String shareText = text.getText().toString();
+                                        if (shareText.isEmpty()){
+                                            Toast.makeText(MainActivity.this, "Please take a clear photo and try again.", Toast.LENGTH_LONG).show();
+
+                                            return;
+                                        }
+
 
                                         Intent myintent = new Intent(Intent.ACTION_SEND);
 
                                         myintent.setType("text/plain");
-                                        String sharebody = "My BMI is : " + calculatedBmi + "\n Check Yours Too ! \n" + " https://play.google.com/store/apps/details?id=com.aditya.vikas.bmicalculater&hl=en";
-                                        String sharesub = "sharebody" + result;
+                                        String sharebody = ""+ shareText;
+                                        String sharesub = "My note";
                                         myintent.putExtra(Intent.EXTRA_TEXT, sharebody);
                                         myintent.putExtra(Intent.EXTRA_SUBJECT, sharesub);
-startActivity(Intent.createChooser(myintent,"Share BMI using..."));
+startActivity(Intent.createChooser(myintent,"Share Note Text using..."));
 
                                     }
                                 });
-         */
+
 
 
 
