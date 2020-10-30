@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +47,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         //Binding the google sign in button created in XML
         signInButton = findViewById(R.id.sign_in_button);
         signInButton.findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -60,6 +64,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
     }
+
+
+
+
+
+
+
+
 
     //Onclick listener for the Google sign in button, note that I've extended the View.OnClickListener class, and hence am able to use onClick in this way
     @Override
