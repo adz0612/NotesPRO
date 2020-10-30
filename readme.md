@@ -1,7 +1,8 @@
 # NotesPRO
 ![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/Going%20through%20you%20notes%20made.png)
 ### Get the official APK here : [Google Drive](https://drive.google.com/file/d/1lejEekUWp9RGuE16YmmEM12jU4guA7lC/view?usp=sharing)
-### Open to suggestions!
+### You can check out a video on our application here: [YouTube](https://youtu.be/S4HYd6i8IAI)
+### Open to suggestions and feedback!
 
 Our application aims to make it easier for students / working professionals to search through their notes easier. 
 One can also listen to their notes just by taking a picture for quickly revising stuff on the go.
