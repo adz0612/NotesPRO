@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    >
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/start"
         android:layout_width="173dp"
         android:layout_height="133dp"
         android:text="Recognize Text"
@@ -20,38 +20,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Space
-    android:layout_width="wrap_content"
-    android:layout_height="30dp"/>
-
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"/>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="191dp"
-        android:layout_height="151dp"
-        android:layout_below="@+id/button"
+        android:id="@+id/result"
+        android:layout_width="318dp"
+        android:layout_height="168dp"
+        android:layout_below="@+id/start"
         android:paddingLeft="50dp"
         android:scrollbars="vertical"
-        android:text="Based on onDevice model"
+        android:text="Converted Text Will Appear Here..."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/cloud"
-        android:layout_width="157dp"
-        android:layout_height="172dp"
-        android:layout_below="@+id/button"
-        android:paddingLeft="50dp"
-        android:scrollbars="vertical"
-        android:text="Based on cloud model"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.511" />
 
     <Button
         android:id="@+id/speak"
@@ -64,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/result"
         app:layout_constraintVertical_bias="0.04" />
 
 

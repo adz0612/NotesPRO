@@ -3,9 +3,13 @@ package com.example.textrecognition;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageProxy;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
@@ -17,8 +21,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 private TextToSpeech mtts;
 private Button speak;
 private TextView text;
+private  TextView cloudText;
 
 
     @Override
@@ -38,39 +45,41 @@ private TextView text;
         setContentView(R.layout.activity_main);
 
         speak = findViewById(R.id.speak);
+        cloudText = findViewById(R.id.cloud);
 
         Button ret;
 
 
-mtts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-    @Override
-    public void onInit(int status) {
-        if(status == TextToSpeech.SUCCESS){
-           int res =  mtts.setLanguage(Locale.ENGLISH);
+        mtts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                   int res =  mtts.setLanguage(Locale.ENGLISH);
 
-           if (res == TextToSpeech.LANG_MISSING_DATA || res ==TextToSpeech.LANG_NOT_SUPPORTED){
-               Toast.makeText(MainActivity.this , "Language not available!",Toast.LENGTH_LONG).show();
-
-
-           }else{
-
-               speak.setEnabled(true);
-           }
-
-        }
+                   if (res == TextToSpeech.LANG_MISSING_DATA || res ==TextToSpeech.LANG_NOT_SUPPORTED){
+                       Toast.makeText(MainActivity.this , "Language not available!",Toast.LENGTH_LONG).show();
 
 
-    }
-});
+                   }else{
+
+                       speak.setEnabled(true);
+                   }
+
+                }
+
+
+            }
+        });
 
 
 
-speak.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        speakText();
-    }
-});
+
+        speak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speakText();
+            }
+        });
 
 
 
@@ -98,12 +107,14 @@ speak.setOnClickListener(new View.OnClickListener() {
         {
             if(resultCode == RESULT_OK){
 
+
+                // <! ------               On Device BASED MODEL        STARTS here                ----->
+
                 Bitmap image1 = (Bitmap)data.getExtras().get("data");
                 FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(image1);
 
                 FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
                         .getOnDeviceTextRecognizer();
-
 
 
 
@@ -129,6 +140,50 @@ speak.setOnClickListener(new View.OnClickListener() {
                                         Toast.makeText(MainActivity.this , " Task Failed" ,Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
+
+
+                // <! ------               On Device BASED MODEL     ENDS here                   ----->
+
+
+
+
+
+
+                // <! ------               CLOUD BASED MODEL          STARTS here              ----->
+
+                FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance()
+                        .getCloudTextRecognizer();
+
+
+                        detector.processImage(image)
+                                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                                    @Override
+                                    public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                                        Toast.makeText(MainActivity.this , " Boom" ,Toast.LENGTH_SHORT).show();
+                                        String cloudStr = firebaseVisionText.getText();
+                                        cloudText.setMovementMethod(new ScrollingMovementMethod());
+                                        cloudText.setText(cloudStr);
+
+
+                                    }
+                                })
+                                .addOnFailureListener(
+                                        new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                // Task failed with an exception
+                                                // ...
+                                            }
+                                        });
+
+
+
+
+
+                // <! ------               CLOUD BASED MODEL       ENDS here                   ----->
+
+
 
 
 
@@ -168,5 +223,7 @@ speak.setOnClickListener(new View.OnClickListener() {
         }
         super.onDestroy();
     }
+
+
 }
 
