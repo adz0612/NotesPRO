@@ -1,0 +1,2 @@
+1) logos for the app icon
+2) hexcode for background - F7F6F1
