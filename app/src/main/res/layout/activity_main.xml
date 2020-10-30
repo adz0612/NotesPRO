@@ -6,66 +6,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A6CBFF"
     android:padding="16dp"
     tools:context=".MainActivity">
 
+
     <Button
         android:id="@+id/button"
-        android:layout_width="173dp"
-        android:layout_height="133dp"
-        android:text="Recognize Text"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:background="@drawable/round_button"
+        android:text="Scan and Recognize text"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Space
     android:layout_width="wrap_content"
     android:layout_height="30dp"/>
 
 
-    <TextView
+    <EditText
         android:id="@+id/textView"
-        android:layout_width="191dp"
-        android:layout_height="151dp"
+        android:layout_width="350dp"
+        android:layout_height="177dp"
         android:layout_below="@+id/button"
+        android:hint="Scanned text will appear here."
         android:paddingLeft="50dp"
+        android:imeOptions="actionDone"
         android:scrollbars="vertical"
-        android:text="Based on onDevice model"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/cloud"
-        android:layout_width="157dp"
-        android:layout_height="172dp"
-        android:layout_below="@+id/button"
-        android:paddingLeft="50dp"
-        android:scrollbars="vertical"
-        android:text="Based on cloud model"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <Button
         android:id="@+id/speak"
         android:layout_width="131dp"
         android:layout_height="58dp"
-        android:text="Listen to it!"
         android:enabled="false"
+        android:text="Listen to it!"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.04" />
+        app:layout_constraintVertical_bias="0.159" />
+
+    <EditText
+        android:id="@+id/speed"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Speed"
+        android:imeOptions="actionDone"
+
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/speak"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speech Speed [ 1 - 100 ] : "
+        android:textColor="#054482"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
+
+        android:text="Text detected from photo:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

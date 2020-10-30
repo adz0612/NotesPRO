@@ -16,6 +16,7 @@ import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ private TextToSpeech mtts;
 private Button speak;
 private TextView text;
 private  TextView cloudText;
-
+private EditText textSpeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,9 @@ private  TextView cloudText;
         setContentView(R.layout.activity_main);
 
         speak = findViewById(R.id.speak);
-        cloudText = findViewById(R.id.cloud);
 
         Button ret;
-
+        textSpeed = findViewById(R.id.speed);
 
         mtts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -73,11 +73,44 @@ private  TextView cloudText;
 
 
 
+        /*
+
+
+
+        copy.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        Intent myintent = new Intent(Intent.ACTION_SEND);
+
+                                        myintent.setType("text/plain");
+                                        String sharebody = "My BMI is : " + calculatedBmi + "\n Check Yours Too ! \n" + " https://play.google.com/store/apps/details?id=com.aditya.vikas.bmicalculater&hl=en";
+                                        String sharesub = "sharebody" + result;
+                                        myintent.putExtra(Intent.EXTRA_TEXT, sharebody);
+                                        myintent.putExtra(Intent.EXTRA_SUBJECT, sharesub);
+startActivity(Intent.createChooser(myintent,"Share BMI using..."));
+
+                                    }
+                                });
+         */
+
+
+
+
+
+
+
 
         speak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                speakText();
+              String speedStr =   textSpeed.getText().toString();
+              if (speedStr.isEmpty()){
+                  Toast.makeText(MainActivity.this , " Please enter speed of speech " , Toast.LENGTH_LONG).show();
+                  return;
+                }
+              int speedInt = Integer.parseInt(speedStr);
+                speakText(speedInt);
             }
         });
 
@@ -151,7 +184,7 @@ private  TextView cloudText;
 
 
                 // <! ------               CLOUD BASED MODEL          STARTS here              ----->
-
+/*
                 FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance()
                         .getCloudTextRecognizer();
 
@@ -178,7 +211,7 @@ private  TextView cloudText;
                                         });
 
 
-
+*/
 
 
                 // <! ------               CLOUD BASED MODEL       ENDS here                   ----->
@@ -200,18 +233,25 @@ private  TextView cloudText;
         }
 
     }
-    private void speakText(){
+    private void speakText(int speed){
+        try {
+            String textToBeSpoken = text.getText().toString();
+            textToBeSpoken = textToBeSpoken.replace('\n' , ' ');
+            float speechRate = (float)1.0 + (speed)/10;
+            float pitch = (float)1.1;
 
-        String textToBeSpoken = text.getText().toString();
-       textToBeSpoken = textToBeSpoken.replace('\n' , ' ');
-        float speechRate = (float)1.2;
-        float pitch = (float)1.1;
+
+            mtts.setSpeechRate(speechRate);
+            mtts.setPitch(pitch);
+
+            mtts.speak(textToBeSpoken,TextToSpeech.QUEUE_FLUSH,null);
+        }
+        catch (Exception e){
+            Toast.makeText(MainActivity.this , "Please take a clear photo and try again." ,Toast.LENGTH_SHORT).show();
+
+        }
 
 
-        mtts.setSpeechRate(speechRate);
-        mtts.setPitch(pitch);
-
-        mtts.speak(textToBeSpoken,TextToSpeech.QUEUE_FLUSH,null);
 
     }
 
