@@ -16,3 +16,11 @@ One can also listen to their notes just by taking a picture for quickly revising
 
 
 
+
+
+
+
+
+
+
+### Get the official APK here : [Google Drive](https://drive.google.com/file/d/1lejEekUWp9RGuE16YmmEM12jU4guA7lC/view?usp=sharing)
