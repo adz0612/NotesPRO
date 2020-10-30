@@ -1,5 +1,5 @@
 # NotesPRO
-![l](https://drive.google.com/file/d/1ewLESr2V2zlyz2T_yso3IyeYipRw4jDG/view?usp=sharing)
+![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/Going%20through%20you%20notes%20made.png)
 This application aims to make it easier for students / working professionals to search through their notes eaiser. 
 One can also listen to their notes just by taking a picture for quickly revising stuff on the go.
 
