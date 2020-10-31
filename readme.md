@@ -1,6 +1,7 @@
 # NotesPRO
 ![l](https://github.com/adz0612/NotesPRO/blob/master/logo%26icons/Going%20through%20you%20notes%20made.png)
 ### Get the official APK here : [Google Drive](https://drive.google.com/file/d/1lejEekUWp9RGuE16YmmEM12jU4guA7lC/view?usp=sharing)
+> Note: The application downloads as ' TextRecognition '  and NOT ' NotesPRO ' 
 ### You can check out a video on our application here: [YouTube](https://youtu.be/S4HYd6i8IAI)
 ### Open to suggestions and feedback!
 
